@@ -1,0 +1,36 @@
+# Spring boot application
+spring:
+  application:
+    name: springboot-provider
+
+server:
+  port: 9090
+
+management:
+  port: 9091
+
+# Dubbo Application
+dubbo:
+# Base packages to scan Dubbo Component: @com.alibaba.dubbo.config.annotation.Service
+  scan:
+    basePackages: com.ghost.springboot.service.impl
+## The default value of dubbo.application.name is ${spring.application.name}
+  application:
+    id: dubbo-provider
+    name: dubbo-provider
+# Dubbo Protocol
+  protocol:
+    id: dubbo
+    name: dubbo
+## Random port
+    port: -1
+## Dubbo Registry
+  registry:
+    id: my-registry
+    address: nacos://nacos address:8848
+
+## DemoService version
+demo:
+  service:
+    version: 1.0.0
+    name: 1.0.0

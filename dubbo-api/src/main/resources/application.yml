@@ -1,0 +1,5 @@
+nacos:
+  config:
+    server-addr: nacos address:8848
+  discovery:
+    server-addr: nacos address:8848
