@@ -20,7 +20,8 @@ import org.springframework.beans.factory.annotation.Value;
 )
 public class DemoServiceImpl implements DemoService {
 
-    @Value("${demo.service.name}")
+//    @Value("${demo.service.name}")
+    @Value("${spring.redis.host}")
     private String serviceName;
 
     @Override

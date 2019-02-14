@@ -2,6 +2,30 @@
 spring:
   application:
     name: springboot-provider
+  redis:
+    jedis:
+      database: 0
+      pool:
+        max-active: 8
+        max-idle: 9
+        max-wait: -1
+        min-idle: 0
+      redis-dev:
+        host:
+        prot:
+        password:
+        testOnBorrow: false
+      redis-test:
+        host:
+        prot:
+        password:
+        testOnBorrow: false
+      redis-online:
+        host:
+        prot:
+        password:
+        testOnBorrow: false
+    timeout: 0
 
 server:
   port: 9090
@@ -27,7 +51,7 @@ dubbo:
 ## Dubbo Registry
   registry:
     id: my-registry
-    address: nacos://nacos address:8848
+    address: nacos://47.106.227.5:8848
 
 ## DemoService version
 demo:
