@@ -11,21 +11,30 @@ spring:
         max-wait: -1
         min-idle: 0
       redis-dev:
-        host:
-        prot:
+        host: redis-server
+        port: 6379
         password:
         testOnBorrow: false
       redis-test:
         host:
-        prot:
+        port:
         password:
         testOnBorrow: false
       redis-online:
         host:
-        prot:
+        port:
         password:
         testOnBorrow: false
     timeout: 0
+  datasource:
+    platform: mysql
+
+db:
+  num: 1
+  url:
+    0: jdbc:mysql://127.0.0.1:3306/nacos_devtest?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true
+  user: root
+  password: 123456
 
 server:
   port: 9090
@@ -51,7 +60,7 @@ dubbo:
 ## Dubbo Registry
   registry:
     id: my-registry
-    address: nacos://47.106.227.5:8848
+    address: nacos://nacos-server:8848
 
 ## DemoService version
 demo:

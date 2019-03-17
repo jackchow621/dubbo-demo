@@ -13,6 +13,9 @@ spring:
 #        max-idle: 8
 #        min-idle: 0
 #    timeout: 0
+  datasource:
+    platform: mysql
+
 
 server:
   port: 8080
@@ -22,9 +25,16 @@ management:
 ## nacos
 nacos:
   config:
-    server-addr: 47.106.227.5:8848
+    server-addr: nacos-server:8848
   discovery:
-    server-addr: 47.106.227.5:8848
+    server-addr: nacos-server:8848
+
+db:
+  num: 1
+  url:
+    0: jdbc:mysql://127.0.0.1:3306/nacos_devtest?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true
+  user: root
+  password: 123456
 
 ## application
 dubbo:
@@ -35,7 +45,7 @@ dubbo:
 ## nacos registry address
   registry:
     id: my-registry
-    address: nacos://47.106.227.5:8848
+    address: nacos://nacos-server:8848
   protocol:
     id: dubbo
     name: dubbo

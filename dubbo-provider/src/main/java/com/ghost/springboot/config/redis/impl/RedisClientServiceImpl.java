@@ -1,13 +1,15 @@
 package com.ghost.springboot.config.redis.impl;
 
-import com.ghost.springboot.config.redis.RedisClientTemplate;
+import com.ghost.springboot.config.redis.RedisClientService;
 import com.ghost.springboot.config.redis.RedisUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import redis.clients.jedis.BinaryClient;
 import redis.clients.jedis.Jedis;
 
+import javax.annotation.Resource;
 import java.util.*;
 
 /**
@@ -17,10 +19,11 @@ import java.util.*;
  * @Description: TODO
  * @date 2019/1/2515:40
  */
-public class RedisClientTemplateImpl implements RedisClientTemplate {
+@Service
+public class RedisClientServiceImpl implements RedisClientService {
     protected final Logger logger = LoggerFactory.getLogger(getClass());
 
-    @Autowired
+    @Resource
     private RedisUtils redisUtils;
 
     @Override

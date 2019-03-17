@@ -6,7 +6,10 @@ import com.ghost.springboot.service.DemoService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.awt.*;
+
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 /**
  * @author zoulinjun
@@ -16,7 +19,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
  * @date 2019/1/2416:10
  */
 @RestController
-@RequestMapping("demo")
+@RequestMapping("/demo")
 public class DemoController {
 
     @Reference(version = "${demo.service.version}")

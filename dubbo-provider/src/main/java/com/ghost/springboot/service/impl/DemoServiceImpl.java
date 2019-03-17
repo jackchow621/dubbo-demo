@@ -2,7 +2,9 @@ package com.ghost.springboot.service.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.alibaba.dubbo.rpc.RpcContext;
+import com.ghost.springboot.config.redis.impl.RedisClientServiceImpl;
 import com.ghost.springboot.service.DemoService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
 /**
@@ -10,7 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
  * @Title: DemoServiceImpl
  * @ProjectName springboot-nacos
  * @Description: TODO
- * @date 2019/1/2416:04
+ * @date 2019/1/2416:04S
  */
 @Service(
         version = "${demo.service.version}",
@@ -20,9 +22,11 @@ import org.springframework.beans.factory.annotation.Value;
 )
 public class DemoServiceImpl implements DemoService {
 
-//    @Value("${demo.service.name}")
-    @Value("${spring.redis.host}")
+    @Value("${demo.service.name}")
     private String serviceName;
+
+    @Autowired
+    private RedisClientServiceImpl redisClientService;
 
     @Override
     public String sayHello(String name) {
@@ -35,4 +39,5 @@ public class DemoServiceImpl implements DemoService {
                 name));
         return String.format("[%s] : Hello, %s", serviceName, name);
     }
+
 }
