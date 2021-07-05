@@ -1,20 +1,11 @@
 package com.ghost.springboot.config.redis;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
-import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ReflectionUtils;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
-
-import javax.annotation.Resource;
-import java.lang.reflect.Field;
 
 /**
  * @author zoulinjun
@@ -24,9 +15,8 @@ import java.lang.reflect.Field;
  * @date 2019/2/14 14:02
  */
 @Service
+@Slf4j
 public class RedisUtils {
-
-    private final Logger logger = LoggerFactory.getLogger(getClass());
 
     private  JedisPool jedisPool = null;
 
@@ -96,7 +86,7 @@ public class RedisUtils {
         try {
             jedis = getPool().getResource();
         } catch (Exception e) {
-            logger.error("get redis connection fail:{}", e);
+            log.error("get redis connection fail:{}", e);
         }
         return jedis;
     }

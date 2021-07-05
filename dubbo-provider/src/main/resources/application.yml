@@ -1,69 +1,44 @@
 # Spring boot application
-spring:
-  application:
-    name: springboot-provider
-  redis:
-    jedis:
-      database: 0
-      pool:
-        max-active: 8
-        max-idle: 9
-        max-wait: -1
-        min-idle: 0
-      redis-dev:
-        host: redis-server
-        port: 6379
-        password:
-        testOnBorrow: false
-      redis-test:
-        host:
-        port:
-        password:
-        testOnBorrow: false
-      redis-online:
-        host:
-        port:
-        password:
-        testOnBorrow: false
-    timeout: 0
-  datasource:
-    platform: mysql
-
-db:
-  num: 1
-  url:
-    0: jdbc:mysql://127.0.0.1:3306/nacos_devtest?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true
-  user: root
-  password: 123456
-
-server:
-  port: 9090
-
-management:
-  port: 9091
-
-# Dubbo Application
-dubbo:
-# Base packages to scan Dubbo Component: @com.alibaba.dubbo.config.annotation.Service
-  scan:
-    basePackages: com.ghost.springboot.service.impl
-## The default value of dubbo.application.name is ${spring.application.name}
-  application:
-    id: dubbo-provider
-    name: dubbo-provider
-# Dubbo Protocol
-  protocol:
-    id: dubbo
-    name: dubbo
-## Random port
-    port: -1
-## Dubbo Registry
-  registry:
-    id: my-registry
-    address: nacos://nacos-server:8848
-
-## DemoService version
-demo:
-  service:
-    version: 1.0.0
-    name: 1.0.0
+  spring.application.name: springboot-provider
+  spring.redis.jedis.database: 0
+  spring.redis.jedis.pool.max-active: 8
+  spring.redis.jedis.pool.max-idle: 9
+  spring.redis.jedis.pool.max-wait: -1
+  spring.redis.jedis.pool.min-idle: 0
+  spring.redis.jedis.redis-dev.host: redis-server
+  spring.redis.jedis.redis-dev.port: 6379
+  spring.redis.jedis.redis-dev.password:
+  spring.redis.jedis.redis-dev.testOnBorrow: false
+  spring.redis.jedis.redis-test.host:
+  spring.redis.jedis.redis-test.port:
+  spring.redis.jedis.redis-test.password:
+  spring.redis.jedis.redis-test.testOnBorrow: false
+  spring.redis.jedis.redis-online.host:
+  spring.redis.jedis.redis-online.port:
+  spring.redis.jedis.redis-online.password:
+  spring.redis.jedis.redis-online.testOnBorrow: false
+  spring.redis.timeout: 0
+  spring.datasource.platform: mysql
+  db.num: 1
+  db.url.0: jdbc:mysql://127.0.0.1:3306/nacos?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true
+  db.user: root
+  db.password: 123456
+  server.port: 9090
+  management.port: 9091
+  # Dubbo Application
+  # Base packages to scan Dubbo Component: @com.alibaba.dubbo.config.annotation.Service
+  dubbo.scan.basePackages: com.ghost.springboot.service.impl
+  ## The default value of dubbo.application.name is ${spring.application.name}
+  dubbo.application.id: dubbo-provider
+  dubbo.application.name: dubbo-provider
+  # Dubbo Protocol
+  dubbo.protocol.id: dubbo
+  dubbo.protocol.name: dubbo
+  ## Random port
+  dubbo.protocol.port: -1
+  ## Dubbo Registry
+  dubbo.registry.id: my-registry
+  dubbo.registry.address: nacos://localhost:8848
+  ## DemoService version
+  demo.service.version: 1.0.0
+  demo.service.name: 1.0.0

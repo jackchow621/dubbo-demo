@@ -1,60 +1,23 @@
 # Spring boot application
-spring:
-  application:
-    name: springboot-consumer
-#  redis:
-#    database: 0
-#    host: localhost
-#    port: 6379
-#    jedis:
-#      pool:
-#        max-active: 8
-#        max-wait: -1
-#        max-idle: 8
-#        min-idle: 0
-#    timeout: 0
-  datasource:
-    platform: mysql
-
-
-server:
-  port: 8080
-management:
-  prot: 8081
-
-## nacos
-nacos:
-  config:
-    server-addr: nacos-server:8848
-  discovery:
-    server-addr: nacos-server:8848
-
-db:
-  num: 1
-  url:
-    0: jdbc:mysql://127.0.0.1:3306/nacos_devtest?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true
-  user: root
-  password: 123456
-
-## application
-dubbo:
-  application:
-    id: dubbo-consumer
-    name: dubbo-consumer
-    qos-port: 33333
-## nacos registry address
-  registry:
-    id: my-registry
-    address: nacos://nacos-server:8848
-  protocol:
-    id: dubbo
-    name: dubbo
-    port: -1
-#  scan:
-#    basePackages: com.ghost.springboot.service
-  consumer:
-    check: false
-
-demo:
-  service:
-    version: 1.0.0
+  spring.application.name: springboot-consumer
+  spring.datasource.platform: mysql
+  server.port: 8080
+  management.prot: 8081
+  ## nacos
+  nacos.config.server-addr: nacos-server:8848
+  nacos.discovery.server-addr: nacos-server:8848
+  db.num: 1
+  db.url.0: jdbc:mysql://127.0.0.1:3306/nacos_devtest?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true
+  db.user: root
+  db.password: 123456
+  dubbo.application.id: dubbo-consumer
+  dubbo.application.name: dubbo-consumer
+  dubbo.application.qos-port: 33333
+  dubbo.registry.id: my-registry
+  ## nacos registry address
+  dubbo.registry.address: nacos://localhost:8848
+  dubbo.protocol.id: dubbo
+  dubbo.protocol.name: dubbo
+  dubbo.protocol.port: -1
+  dubbo.consumer.check: false
+  demo.service.version: 1.0.0
