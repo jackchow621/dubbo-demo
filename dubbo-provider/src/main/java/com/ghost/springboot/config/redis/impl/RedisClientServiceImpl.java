@@ -4,10 +4,9 @@ import com.ghost.springboot.config.redis.RedisClientService;
 import com.ghost.springboot.config.redis.RedisUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import redis.clients.jedis.BinaryClient;
 import redis.clients.jedis.Jedis;
+import redis.clients.jedis.ListPosition;
 
 import javax.annotation.Resource;
 import java.util.*;
@@ -155,38 +154,6 @@ public class RedisClientServiceImpl implements RedisClientService {
         } finally {
             jedis.close();
         }
-    }
-
-    public String setWithNxAndPx(String key, String value, long time) {
-        String result = null;
-        Jedis jedis = redisUtils.getJedis();
-        if (jedis == null) {
-            return result;
-        }
-        try {
-            result = jedis.set(key, value, "NX", "PX", time);
-        } catch (Exception e) {
-            logger.error("jedisPoolFactory set error!key=" + key + ",value=" + value, e);
-        } finally {
-            jedis.close();
-        }
-        return result;
-    }
-
-    public String setWithXxAndPx(String key, String value, long time) {
-        String result = null;
-        Jedis jedis = redisUtils.getJedis();
-        if (jedis == null) {
-            return result;
-        }
-        try {
-            result = jedis.set(key, value, "XX", "PX", time);
-        } catch (Exception e) {
-            logger.error("jedisPoolFactory set error!key=" + key + ",value=" + value, e);
-        } finally {
-            jedis.close();
-        }
-        return result;
     }
 
     public void setVal(byte[] key, byte[] value) {
@@ -488,7 +455,7 @@ public class RedisClientServiceImpl implements RedisClientService {
             return value;
         }
         try {
-            value = jedis.linsert(key, BinaryClient.LIST_POSITION.BEFORE, pivot, str);
+            value = jedis.linsert(key, ListPosition.BEFORE, pivot, str);
         } catch (Exception e) {
             logger.error("jedisPoolFactory delVal error!key=" + key + ",value=" + value, e);
             throw e;

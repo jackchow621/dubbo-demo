@@ -1,0 +1,66 @@
+# Spring boot application
+server:
+  port: 9090
+
+management:
+  port: 9091
+
+spring:
+  profiles:
+    active: dev
+  main:
+    allow-bean-definition-overriding: true
+  redis:
+    jedis:
+      database: 0
+      pool:
+        max-active: 8
+        max-idle: 9
+        max-wait: -1
+        min-idle: 0
+      redis-dev:
+        host: localhost
+        password: ''
+        port: 6379
+        testOnBorrow: false
+      redis-online:
+        host: ''
+        password: ''
+        port: ''
+        testOnBorrow: false
+      redis-test:
+        host: ''
+        password: ''
+        port: ''
+        testOnBorrow: false
+    timeout: 0
+
+# Dubbo Application
+dubbo:
+  ## The default value of dubbo.application.name is ${spring.application.name}
+  application:
+    id: dubbo-provider
+    name: dubbo-provider
+  # Dubbo Protocol
+  protocol:
+    id: dubbo
+    name: dubbo
+    ## Random port
+    port: 9999
+  provider:
+    group: jack_group
+  ## Dubbo Registry
+  registry:
+    address: nacos://localhost:8848
+    id: my-registry
+    parameters[namespace]: @profileActive@
+    protocol: dubbo
+  # Base packages to scan Dubbo Component: @com.alibaba.dubbo.config.annotation.Service
+  scan:
+    base-packages: com.ghost.springboot.service
+
+## DemoService version
+demo:
+  service:
+    name: demoService
+    version: 1.0.0

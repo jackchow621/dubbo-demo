@@ -1,0 +1,33 @@
+server:
+  port: 8080
+
+management:
+  port: 8081
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  profiles:
+    active: test
+
+dubbo:
+  application:
+    id: dubbo-consumer
+    name: dubbo-consumer
+    qos-port: 33333
+  registry:
+    id: my-registry
+    address: nacos://localhost:8848
+    parameters[namespace]: @profileActive@
+  protocol:
+    id: dubbo
+    name: dubbo
+    port: 8888
+  consumer:
+    check: false
+    group: jack_group
+
+## DemoService version
+demo:
+  service:
+    name: demoService
+    version: 1.0.0
