@@ -22,5 +22,4 @@ public class GlobalContext {
     private String userId;
     private String entId;
     private String tenantId;
-    private String operationPlatformId;
 }

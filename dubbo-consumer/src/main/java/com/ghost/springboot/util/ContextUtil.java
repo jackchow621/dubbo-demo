@@ -1,6 +1,7 @@
 package com.ghost.springboot.util;
 
 import com.ghost.springboot.annotation.GlobalContext;
+import lombok.NoArgsConstructor;
 import org.slf4j.MDC;
 
 /**
@@ -9,25 +10,21 @@ import org.slf4j.MDC;
  * @author: jackchow
  * @create: 2021/11/28 13:42
  */
+@NoArgsConstructor
 public class ContextUtil {
-    public static final String REQUEST_CONTEXT = "request-context";
     public static final String TRACE_ID = "PtxId";
-    public static ThreadLocal<GlobalContext> currentThreadLocal = ThreadLocal.withInitial(() -> {
-        return new GlobalContext();
-    });
-
-    public ContextUtil() {
-    }
+    public static ThreadLocal<GlobalContext> currentThreadLocal =
+            ThreadLocal.withInitial(() -> new GlobalContext());
 
     public static GlobalContext getCurrentContext() {
-        return (GlobalContext) currentThreadLocal.get();
+        return currentThreadLocal.get();
     }
 
     public static void setCurrentContext(GlobalContext globalContext) {
         currentThreadLocal.set(globalContext);
         String traceId = globalContext.getTraceId();
-        if (traceId != null && traceId.length() > 0 && MDC.get("PtxId") == null) {
-            MDC.put("PtxId", traceId);
+        if (traceId != null && traceId.length() > 0 && MDC.get(TRACE_ID) == null) {
+            MDC.put(TRACE_ID, traceId);
         }
 
     }
@@ -38,12 +35,12 @@ public class ContextUtil {
     }
 
     public static void setTranceId(String traceId) {
-        MDC.put("PtxId", traceId);
+        MDC.put(TRACE_ID, traceId);
         getCurrentContext().setTraceId(traceId);
     }
 
     public static String getTraceId() {
-        return MDC.get("PtxId");
+        return MDC.get(TRACE_ID);
     }
 
     public static String getClientHost() {
@@ -54,20 +51,14 @@ public class ContextUtil {
     public static String getAndCheckTenantId() {
         String tenantId = getTenantId();
         if (tenantId == null) {
-            throw new RuntimeException("租户Id不能为空");
-        } else {
-            return tenantId;
+            throw new RuntimeException("tenantId can't be null");
         }
+        return tenantId;
     }
 
     public static String getTenantId() {
         GlobalContext context = getCurrentContext();
         return context != null ? context.getTenantId() : null;
-    }
-
-    public static String getOperationPlatformId() {
-        GlobalContext context = getCurrentContext();
-        return context != null ? context.getOperationPlatformId() : null;
     }
 }
 

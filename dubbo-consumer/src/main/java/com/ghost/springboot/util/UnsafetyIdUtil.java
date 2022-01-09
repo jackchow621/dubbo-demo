@@ -38,7 +38,7 @@ public class UnsafetyIdUtil {
     }
 
     public static String genUuid() {
-        return snowflake.nextId() + "";
+        return String.valueOf(snowflake.nextId());
     }
 
     public static Long getTimeFromId(Long id) {

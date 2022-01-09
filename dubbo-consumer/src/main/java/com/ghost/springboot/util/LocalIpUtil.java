@@ -1,11 +1,16 @@
 package com.ghost.springboot.util;
 
+import com.google.common.collect.Sets;
+import lombok.NoArgsConstructor;
+
 import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.Iterator;
+import java.util.Set;
 
 /**
  * @program dubbo-demo
@@ -13,13 +18,12 @@ import java.util.stream.Collectors;
  * @author: jackchow
  * @create: 2021/11/29 20:14
  */
+@NoArgsConstructor
 public class LocalIpUtil {
-    public static Set<String> priorityLocal = (Set) Arrays.asList("eth", "bond", "en").stream().collect(Collectors.toSet());
+    public static Set<String> priorityLocal = Sets.newHashSet("eth", "bond", "en");
     private static volatile String localIp = null;
-    private static Set<String> localIps = new HashSet();
+    private static Set<String> localIps = Sets.newHashSet();
 
-    public LocalIpUtil() {
-    }
 
     public static String getLocalIp() {
         if (localIp != null) {
@@ -31,7 +35,7 @@ public class LocalIpUtil {
 
                 String priority;
                 while (allNetInterface.hasMoreElements()) {
-                    NetworkInterface e = (NetworkInterface) allNetInterface.nextElement();
+                    NetworkInterface e = allNetInterface.nextElement();
 
                     for (Enumeration address = e.getInetAddresses(); address.hasMoreElements(); localIps.add(priority)) {
                         InetAddress add = (InetAddress) address.nextElement();
