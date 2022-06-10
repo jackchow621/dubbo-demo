@@ -17,7 +17,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
-        <dubbo.version>2.6.7</dubbo.version>
+        <dubbo.version>2.6.12</dubbo.version>
         <dubbo-registry-nacos.version>2.6.7</dubbo-registry-nacos.version>
     </properties>
 
